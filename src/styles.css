@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+.container ul li{
+ list-style: none !important;
+ font-family : Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul li{
+ list-style: none !important;
+ font-family : Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+    line-height: 1.4 !important;
+}
+
+#patientorders
+{ 
+    line-height: 1.3 !important;
+}
+
+div.click-to-top span {
+    display: none; 
+    position: absolute;
+     bottom: 12; 
+     left: 0; 
+     right: 0; 
+     background: white; 
+     color:black    ; 
+    }
+div.click-to-top:hover span {
+    display: block;
+ }
+
+ .card-header
+ {
+     padding: 0px !important;
+ }
+
+ .card-body
+ {
+     padding: 6px !important;
+ }
+
+ .card-footer
+ {
+     padding: 3px !important;
+ }
+ .card-title
+ {
+     font-size: 14px !important;
+     padding-top: 2px  !important;
+     padding-left: 10px  !important;
+ }

@@ -1,0 +1,58 @@
+<div class ="container">
+    <div class="row" style="padding-top: 40px; padding-left:400px;">  
+        <div class="col-sm-8">
+        <img src="https://firebasestorage.googleapis.com/v0/b/davitahackaton-b49d4.appspot.com/o/DaVitaLogo.jpg?alt=media&token=63f60d41-395b-448d-aef2-eaa8e0de4a9d" height="120" width="400"  class="img-fluid" alt="Responsive image">
+      </div>
+  </div>
+  <div class="row" style="padding-left:300px; padding-top: 20px">
+      <span class="border border-dark rounded" style="padding-left:100px; padding-top: 30px; padding-right: 150px; padding-bottom: 50px">
+      <form #loginForm ="ngForm" (ngSubmit) = "CreateUser(loginForm); loginForm.reset()">
+      <div class="row" style="padding-top: 10px;"> 
+        <div class="col-6">
+          <label>First Name</label>
+          <input type="text" name= "firstname" ngModel #firstname="ngModel"  class="form-control">
+        </div>
+        <div class="col-6">
+          <label>Last Name</label>
+          <input type="text" name ="lastname" ngModel #lastname="ngModel"  class="form-control">
+        </div>
+      </div>
+      <div class="row" style="padding-top: 10px;">
+        <div class="col-12">
+          <label>Email</label>
+          <input type="text" name ="email" ngModel #email="ngModel"  class="form-control">
+        </div> 
+      </div>      
+      <div class="row" style="padding-top: 10px;">
+        <div class="col-12">
+          <label>Password</label>
+          <input type="password" name ="password" ngModel #password="ngModel"  class="form-control">
+        </div>
+      </div>
+      <div class="row" style="padding-top: 10px;">
+        <div class="col-12">
+          <label>Username</label>
+          <input type="text" name ="username" ngModel #username="ngModel"  class="form-control">
+        </div>
+      </div>        
+      <div class="row">
+          <div class="col-6">
+              <a href="">Login Page</a>       
+            </div>
+      </div>
+      <div class="row" style="padding-top: 20px; padding-left:70px">      
+        <div class="col-6">
+          <button class="btn btn-primary" type="submit">Create</button>          
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary" type="reset">Reset</button>          
+          </div>
+      </div>  
+      <div class="row" *ngIf = "authError" style="width: 500px;padding-top: 20px; ">
+          <div class="col-12 alert alert-danger">{{ authError?.message }}</div>
+        </div>
+      </form>
+      </span>
+  </div>
+</div>
+

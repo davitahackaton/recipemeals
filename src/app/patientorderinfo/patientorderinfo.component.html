@@ -1,0 +1,68 @@
+<app-patient></app-patient>
+<div style="padding-top: 20px; padding-left: 20px">
+  <input type="button" class="btn btn-primary" (click)="getPatientOrderDetails()" value="Show Order History" />
+</div>
+<div class="container" id="patientorders" style="border-left: 10px; border-width:10px;">
+  <div class="row">
+    <div *ngFor="let orderdata of orderDetails | async" class="col-sm-12" style="padding: 10px;">
+      <div class="border border-dark rounded" style="padding: 10px; height: 250px;">
+        <div class="row">
+          <div class="col-sm-3">
+            <img [src]="orderdata.data.recipeimageurl" height="225px" width="250px">
+          </div>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-6">
+                <strong> {{ orderdata.data.recipename }}</strong>
+              </div>
+              <div class="col-sm-4">
+                <label><b> <u>Order Date </u></b></label>
+                <br>
+                {{ orderdata.data.orderdate.toDate() | date:'medium' }}
+              </div>
+              <div class="col-sm-2">
+                <label><b> <u>Order Type </u></b></label>
+                <br>
+                {{ orderdata.data.ordertype }}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-4">
+                <label><b><u>Schedule </u></b></label>
+                <br>
+                {{ orderdata.data.schedule }}
+                <br>
+                <label><b> <u>Card Used</u></b></label>
+                <br>
+                {{ orderdata.data.creditcardnumber }}
+                <br>
+                {{ orderdata.data.creditcardexpiry }}
+              </div>
+              <div class="col-sm-4">
+                <label><b><u>Shipping Address</u></b></label>
+                <br>
+                {{ orderdata.data.shippingaddress.address1 }}
+                <br>
+                {{ orderdata.data.shippingaddress.address2 }}
+                <br>
+                {{ orderdata.data.shippingaddress.city }} , {{ orderdata.data.shippingaddress.state }} -
+                {{ orderdata.data.shippingaddress.zipcode }}
+              </div>
+              <div class="col-sm-4">
+                <label><b><u>Billing Address</u></b></label>
+                <br>
+                {{ orderdata.data.billingaddress.address1 }}
+                <br>
+                {{ orderdata.data.billingaddress.address2 }}
+                <br>
+                {{ orderdata.data.billingaddress.city }} , {{ orderdata.data.billingaddress.state }} -
+                {{ orderdata.data.billingaddress.zipcode }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

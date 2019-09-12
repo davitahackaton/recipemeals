@@ -1,0 +1,28 @@
+<!-- <app-patient></app-patient>
+<div class="container" style="border-left: 10px; border-width:10px;">
+  <div class="row">
+         <div *ngFor= "let recipeData of recipes | async" class="col-sm-4" style="padding: 10px;">                                
+            <div class="border border-dark rounded" style="padding: 10px; height: 320px;">   
+                <a [routerLink] = "['/recipe', recipeData.id]" >
+                  <img [src] = "recipeData.data.imageurl" class="img-fluid" height="500px" width="400px" >
+                  </a>                 
+                <strong> {{ recipeData.data.recipename }}</strong>
+                <hr> 
+                <div class="row">
+                <div class="col-sm-8">
+                <ul *ngFor = "let dietType of recipeData.data.diettypes">
+                    <li>
+                      {{ dietType }}
+                    </li>
+                </ul>
+              </div>
+              <div class="col-sm-4">
+                  {{recipeData.data.servingsize}}
+                  <br>
+                  {{recipeData.data.portions}}
+              </div>
+              </div>              
+            </div>                   
+          </div>    
+  </div>    
+</div> -->

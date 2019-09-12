@@ -1,0 +1,33 @@
+<app-patient></app-patient>
+<div style="padding:10px">
+  <input type="button" class="btn btn-primary" style="border-radius: 5px; padding-left: 5px; margin-right: 10px;"
+    value="CKD Non - Dialysis" (click)="getAllRecipeDetails('CKD non-dialysis')" />
+  <input type="button" class="btn btn-primary" style="border-radius: 5px; padding-left: 5px; margin-right: 10px;"
+    value="Diabetes" (click)="getAllRecipeDetails('Diabetes')" />
+  <input type="button" class="btn btn-primary" style="border-radius: 5px; padding-left: 5px; margin-right: 10px;"
+    value="Dialysis" (click)="getAllRecipeDetails('Dialysis')" />
+</div>
+<div class="container" style="border-left: 10px; border-width:10px;">
+  <div class="row">
+    <div *ngFor="let recipeData of recipesforpatient | async" class="col-sm-4" style="padding: 10px;">
+      <div class="border border-dark rounded" style="padding: 10px; height: 250px;">
+        <a [routerLink]="['/recipe', recipeData.id]">
+          <img [src]="recipeData.data.imageurl" class="img-fluid" height="500px" width="400px">
+        </a>
+        <strong> {{ recipeData.data.recipename }}</strong>
+        <hr>
+        <div class="row">
+          <div class="col-sm-6">
+            <b>Serving Size</b> <br>
+            {{recipeData.data.servingsize}}
+          </div>
+          <div class="col-sm-6">
+            <b>Portions</b> {{recipeData.data.portions}}
+            <br>
+            <b>Price Per Unit</b> $ {{recipeData.data.price}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

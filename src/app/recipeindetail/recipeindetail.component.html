@@ -1,0 +1,82 @@
+<app-patient></app-patient>
+<div class=".container-fluid" style="padding-top: 10px; padding-left:120px; padding-right:100px;">
+  <div class="row">
+    <div class="col-sm-9">
+      <label
+        style="font-size: 45px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: teal">
+        {{ recipeData.recipename }}</label>
+    </div>
+    <div class="col-sm-1 click-to-top">
+      <a [routerLink]="['/mealkit', recipeIdData ]">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/davitahackaton-b49d4.appspot.com/o/GroceryStore.png?alt=media&token=e9292241-62ac-457d-923a-7f26476dc24e"
+          target='_blank' class="img-fluid" height="50px" width="60px"><span>DaVita Meal Kit</span>
+      </a>
+    </div>
+    <div class="col-sm-2 click-to-top">
+      <a [routerLink]="['/order', recipeIdData ]">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/davitahackaton-b49d4.appspot.com/o/ready-to-eat.png?alt=media&token=274c819c-57cf-4d93-bf20-9a192e725aa0"
+          target='_blank' class="img-fluid" height="50px" width="60px"><span>Ready to Eat</span>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="border border-dark rounded" style="padding: 10px; height: 320px; width:420px">
+        <img [src]="recipeData.imageurl" height="300px" width="400px">
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-4">
+          <label style="padding-left: 40px; padding-bottom:5px;"> <b><u>Diet Types</u></b></label>
+          <ul *ngFor="let dietType of recipeData?.diettypes">
+            <li style="text-decoration: none">
+              {{ dietType }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <b>Serving Size </b>
+          {{recipeData.servingsize}}
+          <br>
+          <br>
+          <b>Portions</b>
+          {{recipeData.portions}}
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-5">
+          <label style="padding-left: 40px; padding-bottom:5px;"><b><u>Ingrediants</u></b></label>
+          <ul *ngFor="let ingrediant of recipeData.ingredients">
+            <li style="text-decoration: none">
+              {{ingrediant}}
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-7">
+          <label style="padding-left: 40px; padding-bottom:5px;"><b><u>Nutrients</u></b></label>
+          <ul *ngFor="let nutrient of recipeData.nutrients">
+            <li style="text-decoration: none">
+              {{nutrient}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <label style="padding-left: 40px; padding-bottom:5px;"><b><u>Preparation Steps</u></b></label>
+      <ul *ngFor="let preparation of recipeData.preparation">
+        <li style="text-decoration: none">
+          {{preparation}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

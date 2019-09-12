@@ -1,0 +1,211 @@
+<div class=".container-fluid">
+  <div class="row" style="border:teal">
+    <div class="col-sm-1">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/davitahackaton-b49d4.appspot.com/o/Meal%20Kit%20Image.jpg?alt=media&token=8771bebd-79f8-4998-8e09-7f654003d096"
+        height="80px" width="150px" />
+    </div>
+    <div class="col-sm-9" style="padding-left: 100px; padding-top:5px">
+      <label
+        style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 70px; color:chocolate">
+        Bon Apetite</label>
+    </div>
+    <div class="col-sm-2" style="padding-top: 35px;">
+      <div *ngIf="user"> Welcome
+        <br>
+        {{ user?.displayName }}</div>
+    </div>
+  </div>
+</div>
+<hr>
+<label style="font-size: 20px;padding-left: 50px;"><b><u>Order Information</u></b></label>
+<div class=".container-fluid" style="padding-left: 50px;">
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-sm-12">
+      <label style="font-size: 15px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:brown">
+        <b>{{ recipeData?.recipename }}</b></label>
+    </div>
+  </div>
+</div>
+<div class=".container-fluid" style="padding-left: 50px;">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="border border-dark rounded"
+            style="padding: 10px; height: 220px; width:220px;  box-shadow: 5px 10px;">
+            <img [src]="recipeData?.imageurl" height="200px" width="200px">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <label style="padding-left: 40px; padding-bottom:5px;"> <b><u>Diet Types</u></b></label>
+          <ul *ngFor="let dietType of recipeData?.diettypes">
+            <li style="text-decoration: none">
+              {{ dietType }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-2">
+          <b>Serving Size </b>
+          {{recipeData?.servingsize}}
+          <br>
+          <br>
+          <b>Portions</b>
+          {{recipeData?.portions}}
+        </div>
+        <div class="col-sm-4">
+          <label style="padding-left: 40px; padding-bottom:5px;"> <b><u>Ingredients</u></b></label>
+          <ul *ngFor="let preparation of recipeData?.ingredients">
+            <li style="text-decoration: none">
+              {{preparation}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class=".container-fluid" style="padding-top: 10px">
+  <form [formGroup]=" readyKitDetails" style="width: 100%; padding-left:20px; padding-right: 20px;"
+    (ngSubmit)="onSubmit(readyKitDetails.value); readyKitDetails.reset();">
+    <div style="padding-left:400px;">
+      <input type="checkbox" [formControl]="isSameAddressControl">
+      <label style="font-size:14px;"> Same address for Shipping/Billing</label>
+    </div>
+    <div class="form-row">
+      <app-accordion title="Order Frequency" [isHidden]="false" class="col-sm-3">
+        <div formGroupName="orderFrequency">
+          <div class="form-group">
+            <label style="font-size:14px; padding-top:30px;" for="frequency">Frequency</label>
+            <select formControlName="frequency" class="form-control form-control-sm" (change)="onChange($event)">
+              <option *ngFor="let freq of frequency" [ngValue]="freq">
+                {{freq}}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="showDays">
+            <label style="font-size:14px;" for="days">Options:</label>
+            <div class="row form-group">
+              <div *ngFor="let day of weekDaysControls.controls; let i= index" class="col-sm-3">
+                <label>
+                  <input type="checkbox" [formControl]="day" (change)="onCheck(weekDaysControls.controls)" />
+                  {{weekDays[i].day}}
+                </label>
+              </div>
+            </div>
+            <h6>{{selectedDaysString}}</h6>
+          </div>
+        </div>
+      </app-accordion>
+      <app-accordion title="Shipping Address" [isHidden]="false" class="col-sm-3">
+        <div formGroupName="shippingAddressInfo">
+          <div class="form-group">
+            <label style="font-size:14px;" for="addressLine1">Address Line 1</label>
+            <input id="addressLine1" type="text" formControlName="addressLine1" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label style="font-size:14px;" for="addressLine2">Address Line2
+              <i> (Optional)</i></label>
+            <input id="addressLine2" type="text" formControlName="addressLine2" class="form-control form-control-sm">
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label style="font-size:14px;" for="city">City</label>
+                <input id="city" type="text" formControlName="city" class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label style="font-size:14px;" for="state">State</label>
+                <!-- <input id="state" type="text" formControlName="state" class="form-control"> -->
+                <select formControlName="state" class="form-control form-control-sm">
+                  <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label style="font-size:14px;" for="zipCode">Zip Code</label>
+                <input id="zipCode" type="text" formControlName="zipCode" class="form-control form-control-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-accordion>
+      <app-accordion title="BillingAddress" [isHidden]="false" class="col-sm-3">
+        <div formGroupName="billingAddressInfo">
+          <div class="form-group">
+            <label style="font-size:14px;" for="addressLine1">Address Line 1</label>
+            <input id="addressLine1" type="text" formControlName="addressLine1" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label style="font-size:14px;" for="addressLine2">Address Line2 <i>(Optional)</i></label>
+            <input id="addressLine2" type="text" formControlName="addressLine2" class="form-control form-control-sm">
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label style="font-size:14px;" for="city">City</label>
+                <input id="city" type="text" formControlName="city" class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label style="font-size:14px;" for="state">State</label>
+                <select formControlName="state" class="form-control form-control-sm">
+                  <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label style="font-size:14px;" for="zipCode">Zip Code</label>
+                <input id="zipCode" type="text" formControlName="zipCode" class="form-control form-control-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-accordion>
+      <app-accordion title="Credit Card Details" class="col-sm-3" [isHidden]="false">
+        <div formGroupName="creditCardInfo">
+          <div class="form-group">
+            <label style="font-size:14px;" for="nameOnTheCard">Name on the Card</label>
+            <input id="nameOnTheCard" type="text" formControlName="nameOnTheCard" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label style="font-size:14px;" for="ccNumber">Credit Card Number</label>
+            <input id="ccNumber" type="text" formControlName="ccNumber" class="form-control form-control-sm">
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label style="font-size:14px;" for="expiryDate">Expiry Date</label>
+              <input id="expiryDate" type="text" formControlName="expiryDate" class="form-control form-control-sm"
+                placeholder="mm/yyyy">
+            </div>
+            <div class="form-group col-sm-6">
+              <label style="font-size:14px;" for="cvv">cvv</label>
+              <input id="cvv" type="password" formControlName="cvv" class="form-control form-control-sm"
+                placeholder="cvv">
+            </div>
+          </div>
+        </div>
+      </app-accordion>
+    </div>
+    <div class="form-row" style="padding-top:10px;padding-left: 100px;">
+      <div class="col-sm-1">
+        <button class="button" type="submit" class="btn btn-success" [disabled]="!readyKitDetails.valid">Order</button>
+      </div>
+      <div class="col-sm-1">
+        <button class="button" type="reset" class="btn btn-secondary" [disabled]="!readyKitDetails.valid">Reset</button>
+      </div>
+      <div class="col-sm-10">
+        <div *ngIf="successMessage">
+          <div class=" col-8 alert alert-success">Your Order has been succesfully placed and will recieve mail
+            notification.</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

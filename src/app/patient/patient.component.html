@@ -1,0 +1,64 @@
+<div class=".container-fluid">
+  <div class="row" style="padding-top: 40px; padding-left:40px;">
+    <div class="col-sm-9">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/davitahackaton-b49d4.appspot.com/o/DaVitaLogo.jpg?alt=media&token=63f60d41-395b-448d-aef2-eaa8e0de4a9d"
+        height="80" width="150" class="img-fluid" alt="Responsive image">
+    </div>
+    <div class="col-sm-2">
+      <div *ngIf="user"> Welcome
+        <br>
+        {{ user?.displayName }}</div>
+    </div>
+    <div class="col-sm-1">
+      <div *ngIf="user"> <input type="button" class="btn btn-primary" value="Logout" (click)="logout()"></div>
+    </div>
+  </div>
+  <hr>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/PatientForYouTab" routerLinkActive="active">Recipe Categories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/AllRecipes" routerLinkActive="active">Recipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/patientorders" routerLinkActive="active">Orders </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/reports" routerLinkActive="active">Reports </a>
+        </li>
+      </ul>
+      <form #searchForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="getRecipeDetailsBySearchText(searchForm)">
+        <input class="form-control mr-sm-2" type="search" name="searchText" ngModel #searchText="ngModel"
+          placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="container" style="border-left: 10px; border-width:10px;">
+    <div class="row">
+      <div *ngFor="let recipeData of recipesforsearch | async" class="col-sm-4" style="padding: 10px;">
+        <div class="border border-dark rounded" style="padding: 10px; height: 250px;">
+          <a [routerLink]="['/recipe', recipeData.id]">
+            <img [src]="recipeData.data.imageurl" class="img-fluid" height="500px" width="400px">
+          </a>
+          <strong> {{ recipeData.data.recipename }}</strong>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6">
+              <b>Serving Size</b> <br>
+              {{recipeData.data.servingsize}}
+            </div>
+            <div class="col-sm-6">
+              <b>Portions</b> {{recipeData.data.portions}}
+              <br>
+              <b>Price Per Unit</b> $ {{recipeData.data.price}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,77 @@
+<app-patient></app-patient>
+<div style="padding: 20px;">
+  <label style="font-size:14px; padding-right: 10px;" for="state"><b>Report Type :</b></label>
+  <!-- <input id="state" type="text" formControlName="state" class="form-control"> -->
+  <select (change)="onChange($event)">
+    <option *ngFor="let reportType of reportTypes" [ngValue]="reportType">{{reportType}}
+    </option>
+  </select>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10" *ngIf="reportShow == 'Meal Type Orders'">
+      <app-accordion title="Meal Orders Types" [isHidden]="false">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+              <dx-pie-chart id="pie" title="Meal Orders share" palette="bright" [dataSource]="orderTypeData">
+                <dxo-legend horizontalAlignment="center" verticalAlignment="bottom"></dxo-legend>
+                <dxo-export [enabled]="true"></dxo-export>
+                <dxi-series argumentField="orderType" valueField="count">
+                  <dxo-label [visible]="true" format="fixedPoint" [customizeText]="customizeLabel">
+                    <dxo-connector [visible]="true" [width]="1.5"></dxo-connector>
+                  </dxo-label>
+                  <dxo-small-values-grouping mode="smallValueThreshold" [threshold]="3">
+                  </dxo-small-values-grouping>
+                </dxi-series>
+              </dx-pie-chart>
+            </div>
+            <div class="col-sm">
+            </div>
+          </div>
+        </div>
+      </app-accordion>
+    </div>
+    <div class="col-sm-10" *ngIf="reportShow == 'Recipe Wise Orders'">
+      <app-accordion title="Recipe Orders" [isHidden]="false">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+              <dx-pie-chart id="pie" title="Recipe share" palette="bright" [dataSource]="monthRecipeData">
+                <dxo-legend horizontalAlignment="center" verticalAlignment="bottom"></dxo-legend>
+                <dxo-export [enabled]="true"></dxo-export>
+                <dxi-series argumentField="recipeName" valueField="count">
+                  <dxo-label [visible]="true" format="fixedPoint" [customizeText]="customizeLabel">
+                    <dxo-connector [visible]="true" [width]="1.5"></dxo-connector>
+                  </dxo-label>
+                  <dxo-small-values-grouping mode="smallValueThreshold" [threshold]="3">
+                  </dxo-small-values-grouping>
+                </dxi-series>
+              </dx-pie-chart>
+            </div>
+            <div class="col-sm">
+            </div>
+          </div>
+        </div>
+      </app-accordion>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10" *ngIf="reportShow == 'Monthly Wise Orders'">
+      <app-accordion title="Monthly Orders" [isHidden]="false">
+        <div class="container">
+          <dx-chart id="chart" [dataSource]="monthOrdersData">
+            <dxi-series argumentField="monthName" valueField="ordercount" name="Monthly Orders" type="bar"
+              color="#ffaa66">
+            </dxi-series>
+          </dx-chart>
+        </div>
+      </app-accordion>
+
+    </div>
+  </div>
+</div>
